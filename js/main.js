@@ -7,9 +7,11 @@ let Main = new function() {
         IoHandler.setUp();
 
         Nodes.setUp();
-
         Database.setUp();
+		
+		
         GuiWrapper.setUp();
+        
 
         Canvas.setUp();
         Emblem.setUp();
@@ -21,6 +23,9 @@ let Main = new function() {
         Renderer.setUp();
 
         AudioWrap.setUp();
+		
+		Nodes.playSong(null,"./songs/NutellaRave.mp3");
+		
     }
 
     this.resizeCallback = function() {

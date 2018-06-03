@@ -58,12 +58,13 @@ let Database = new function() {
         db.version(1).stores({id3: "++id, artist, title, duration, img, audio"});
         db.open().catch(e => alert("Open failed: " + e));
 
+
         db.id3.count().then(c => totalCount = c).finally(() => {
             applyShuffle();
             handleView(false);
             if (totalCount == 0) {
-                $("#welcome-full").css("display", "block");
-                GuiWrapper.welcomeOpen = true;
+                $("#welcome-full").css("display", "none");
+                GuiWrapper.welcomeOpen = false;
                 Background.resetBG();
                 Background.loadRedditBackground();
             } else {
@@ -171,7 +172,7 @@ let Database = new function() {
         handleView(true);
     }
 
-    let addSong = function() {
+	let addSong = function() {
         let image = imgStore;
     
         let artist = elmArtist.value;
@@ -204,7 +205,6 @@ let Database = new function() {
             })
         } else {
             
-            db.id3.add({artist: artist, title: title, duration: duration, img: image, audio: fileStore});
             
             order[totalCount] = totalCount;
             index = totalCount;
@@ -214,7 +214,21 @@ let Database = new function() {
         }     
     
     }
-    
+	
+	
+    this.addSong = function() {
+	       
+    }
+	
+	
+	this.addDefaultSong = function(){
+		db.id3.add({artist: "Nutella", title: "NutellaRave", duration: "0:32", img: image, audio: fileStore});
+           
+		Nodes.playSongFromUrl("http://localhost:8080/audio/NutellaRave.mp3");
+      
+	}
+  
+	
     let handleRefresh = function() {
         handleView();
     }

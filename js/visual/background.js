@@ -11,108 +11,32 @@ let Background = new function() {
     let redditData;
     
     this.loadBackground = function() {
-        if (!Config.drawBackground) {
-            return;
-        }
 
-        if (Config.forceImgurBackground) {
-            loadImgurBackground(false);
-            return;
-        }
-        if (Config.forceStaticBackground) {
-            loadStaticBackground();
-            return;
-        }
+		loadStaticBackground();
+            return;       
 
-        this.loadRedditBackground();
+	 
     }
 
     this.loadRedditBackground = function(allowFallback = true) {
-        $.ajax({
-            url: "https://www.reddit.com/r/" + Config.backgroundSubreddit + "/.json",
-            method: "GET",
-            success: handleRedditData,
-            error: allowFallback ? handleRedditFail : null
-        });
+        
+		loadStaticBackground();
+            return;
+		
     }
     
-    let handleRedditData = function(result) {
-        let posts = result.data.children;
-        Util.shuffle(posts);
-        let post;
-        let found = false;
-        for (let i = 0; i < posts.length; i++) {
-            post = posts[i];
-            if (WHITELISTED_DOMAINS.indexOf(post.data.domain) != -1
-                    && post.data.preview.images[0].source.width >= 2560) {
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            console.error("Reddit has failed to offer an image satisfactory to the client; falling back to Imgur.");
-            loadImgurBackground();
-        }
-
-        let smol = post.data.preview.images[0].resolutions[1].url.replaceAll("&amp;", "&");
-        let full = post.data.url.replaceAll("&amp;", "&");
-        setBackground(full, smol);
-    }
-
-    let handleRedditFail = function() {
-        console.error("The client doesn't want to talk to the Reddit API today. Falling back to Imgur...");
-        loadImgurBackground();
-    }
+ 
 
     let loadImgurBackground = function(allowFallback = true) {
-        $.ajax({
-            url: "https://api.imgur.com/3/gallery/r/" + Config.backgroundSubreddit.toLowerCase() + "/0",
-            method: "GET",
-            headers: {
-                Authorization: "Client-ID 0428dcb72fbc5da",
-                Accept: "application/json"
-            },
-            data: {
-                image: localStorage.dataBase64,
-                type: "base64"
-            },
-            success: handleImgurData,
-            error: allowFallback ? handleImgurFail : null
-        });
+     	loadStaticBackground();
+            return;
     }
     
-    let handleImgurData = function(result) {
-        let posts = result.data;
-        Util.shuffle(posts);
-        let post;
-        let found = false;
-        for (let i = 0; i < posts.length; i++) {
-            post = posts[i];
-            if (post.width >= 2560) {
-                found = true;
-                break;
-            }
-        }
 
-        if (!found) {
-            console.error("Imgur has failed to offer an image satisfactory to the client; falling back to static "
-                    + "background.");
-            loadImgurBackground();
-        }
-
-        let id = result.data[Math.floor(Math.random() * result.data.length)].id;
-        setBackground("http://i.imgur.com/" + id + ".jpg", "http://i.imgur.com/" + id + "m.jpg");
-    }
-
-    let handleImgurFail = function() {
-        console.error("The client doesn't want to talk to the Imgur API; falling back to static background.");
-        loadStaticBackground();
-    }
     
     let loadStaticBackground = function() {
         let id = staticUrls[Math.floor(Math.random() * staticUrls.length)];
-        setBackground("http://i.imgur.com/" + id + ".jpg", "http://i.imgur.com/" + id + "m.jpg");
+        setBackground("./img/rabo.jpg", "./img/rabo.jpg");
     }
 
     let setBackground = function(fullRes, lowRes) {
