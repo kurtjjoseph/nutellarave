@@ -10,13 +10,28 @@ let GuiWrapper = new function() {
 
     let timer;
 
+	let toggle = false;
+	
     this.setUp = function() {
-        $(document).mousemove(() => {
-            clearInterval(timer);
+        
+		
+		hideOverlay();
+
+		
+		$(document).click(() => {
+			clearInterval(timer);
+            if(toggle){
             $("#gui-top").fadeIn(Config.guiFadeTime);
             $("#gui-bottom").fadeIn(Config.guiFadeTime);
             $("body").css("cursor", "auto");
 
+			 toggle = false;
+			}
+			else{
+					outsideWindow = true;
+					hideOverlay();
+				toggle = true;	
+			}
             if (!this.keepGui && !Config.keepGui && ($('.gui-part:hover').length == 0 || outsideWindow)) {
                 timer = setTimeout(() => {
                     hideOverlay();

@@ -25,6 +25,7 @@ let Main = new function() {
         AudioWrap.setUp();
 		
 		Nodes.playSong(null,"./songs/NutellaRave.mp3");
+		console.clear();
 		
     }
 

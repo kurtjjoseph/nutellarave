@@ -110,46 +110,7 @@
             </div>
         </div>
 
-        <div id="about-full" class="overlay-container">
-            <div class="vert-cen overlay-window" id="about-full-holder">
-                <div class="absolute-center overlay-pane" id="about-pane">
-                    <div onClick="GuiWrapper.closeAbout();" class="boxclose fa fa-times-circle interactable"></div>
-                    <div id="about-header">
-                        js.nation
-                    </div>
-                    <div id="about-content">
-                        <div>
-                            made with <span class="fa fa-heart"></span> by 
-                            <a href="//caseif.net" target="_blank" rel="noopener noreferrer">caseif</a> & 
-                            <a href="http://incept.online" target="_blank" rel="noopener noreferrer">incept</a>
-                        </div>
-                        <div>
-                            source available on
-                            <a href="//github.com/caseif/js.nation" target="_blank" rel="noopener noreferrer">github</a>
-                        </div>
-                        <div>
-                            <a href="technologies.html" target="_blank" rel="noopener noreferrer">technologies used</a>
-                        </div>
-                        <div>
-                            inspired by <a href="//nations.io/">the nations</a>
-                        </div>
-                        <hr>
-                        <div>
-                            hotkeys
-                        </div>
-                        <div id="about-hotkeys">
-                            f &mdash; flip background
-                            <br>
-                            g &mdash; toggle spectrum glow
-                            <br>
-                            space &mdash; play/pause
-                            <br>
-                            escape &mdash; close overlay
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>        
+            
 
         <div id="welcome-full" class="overlay-container">
             <div class="vert-cen overlay-window" id="welcome-full-holder">
@@ -188,10 +149,7 @@
                 <progress id="volume" class="flex-auto interactable" value="100" max="100"></progress>
             </div>
             <audio autoplay id="audio" onended="Database.playNextSong()"></audio>
-            <!-- Right -->
-            <div id="elm-about">
-                <a href="javascript:GuiWrapper.openAbout();">About</a>
-            </div>
+
         </div>
 
         <div id="content">
