@@ -6,7 +6,7 @@ let GuiWrapper = new function() {
 
     this.keepGui = false;
 
-    let outsideWindow = false;
+    let outsideWindow = true;
 
     let timer;
 
