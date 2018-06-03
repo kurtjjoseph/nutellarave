@@ -42,10 +42,12 @@ let GuiWrapper = new function() {
         $(document).mouseleave(() => {
             outsideWindow = true;
             hideOverlay();
+			
         });
 
         $(document).mouseenter(() => {
             outsideWindow = false;
+			toggle = true;
         });
 
         $("input:text, .ui.button", ".ui.action.input").on("click", function(e) {
